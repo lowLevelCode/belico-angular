@@ -22,13 +22,22 @@ export class AuthService {
     login(username: string, password: string): Observable<Usuario> 
     {                        
         return this.http.post<Usuario>(`http://localhost:3100/api/v0/auth/login`, { username, password })
-        .pipe(map(usuario => {
-            console.log(usuario);
+        .pipe(map(usuario => {            
             localStorage.setItem('currentUser', JSON.stringify(usuario));
             this.currentUserSubject.next(usuario);
             return usuario;
         }));       
-    } 
+    }
+
+    register(nom_usuario: string, clv_usuario: string): Observable<Usuario> 
+    {
+        return this.http.post<Usuario>(`http://localhost:3100/api/v0/auth/registrar`, { nom_usuario, clv_usuario })
+        .pipe(map(usuario => {            
+            localStorage.setItem('currentUser', JSON.stringify(usuario));
+            this.currentUserSubject.next(usuario);
+            return usuario;
+        }));
+    }
 
     logout() 
     {        
@@ -37,16 +46,15 @@ export class AuthService {
     }
 
     testAutenticacion()
-    {
-        const  headers = new  HttpHeaders().set("Authorization", "Bearer "+ this.currentUserValue.token );
-        console.log("current",this.currentUserValue);
-        this.http.get<any>("http://localhost:3100/api/v0/auth/jwtAccess",{headers}).subscribe(
+    {        
+        this.http.get<any>("http://localhost:3100/api/v0/auth/jwtAccess").subscribe(
             data=> {
-                alert(data);
+                console.log("Data:",data);
+                alert("Success data autenticacion");
             }, 
             error=> {
-                console.log(error);
-                alert("Error");
+                console.log("Error:",error);
+                alert("Error test autenticacion");
             }
         )
     }
