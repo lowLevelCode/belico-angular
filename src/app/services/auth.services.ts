@@ -12,15 +12,17 @@ export class AuthService {
 
     constructor(private readonly http:HttpClient) {
         this.currentUserSubject = new BehaviorSubject<Usuario>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
+        this.currentUser = this.currentUserSubject.asObservable();        
     }
 
-    public get currentUserValue(): Usuario {
+    public get currentUserValue(): Usuario 
+    {
         return this.currentUserSubject.value;
     }
 
     login(username: string, password: string): Observable<Usuario> 
     {                        
+        console.log("username", username, password);
         return this.http.post<Usuario>(`http://localhost:3100/api/v0/auth/login`, { username, password })
         .pipe(map(usuario => {            
             localStorage.setItem('currentUser', JSON.stringify(usuario));

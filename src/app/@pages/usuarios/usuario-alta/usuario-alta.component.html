@@ -1,0 +1,64 @@
+<div class="main-card">
+    <mat-card class="loggin-card ">
+        <mat-card-title>Alta de Usuario</mat-card-title>        
+        <mat-card-content>
+            <form [formGroup]="form" (ngSubmit)="submit()">
+            
+                <p>
+                    <mat-form-field class="full-width">
+                        <input type="text" matInput placeholder="Curp" formControlName="curp">
+                    </mat-form-field>
+                </p>            
+                
+                <p>
+                    <mat-form-field class="medium-width">
+                        <input type="email" matInput placeholder="Correo electronico" formControlName="correo">
+                        <mat-icon matSuffix>alternate_email</mat-icon>
+                    </mat-form-field>        
+                </p>            
+
+                <p>
+                    <mat-form-field class="medium-width">
+                        <mat-label>Pais</mat-label>
+                        <mat-select>
+                            <mat-option *ngFor="let food of foods" [value]="food.value">
+                            {{food.viewValue}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>        
+                    
+                    <mat-form-field class="with-10 margin-left-20">
+                        <input type="text" matInput placeholder="Lada" formControlName="lada">                        
+                    </mat-form-field>    
+                    
+                    <mat-form-field class="with-36 margin-left-20">
+                        <input type="text" matInput placeholder="Telefono" formControlName="telefono">                        
+                    </mat-form-field>    
+                </p>                      
+                
+                <p>
+                    <mat-form-field class="medium-width">
+                        <input type="password" matInput placeholder="Contraseña" formControlName="contrasenia">                        
+                    </mat-form-field>        
+
+                    <mat-form-field class="with-48 margin-left-20">
+                        <input type="email" matInput placeholder="Correo electronico" formControlName="correo">                        
+                    </mat-form-field>        
+                </p>        
+
+                <p>
+                    <mat-checkbox>He leído y acepto los Términos y condiciones y el Aviso de privacidad.</mat-checkbox>
+                </p>
+
+                <p>
+                    <mat-checkbox>Deseo recibir información de productos y servicios en mi correo electrónico.</mat-checkbox>
+                </p>
+                
+            <mat-card-actions align="end">                
+                <button mat-raised-button color="primary">Enviar</button>            
+            </mat-card-actions>        
+    
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

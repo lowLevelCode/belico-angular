@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.services';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.services';
 import { Router, ActivatedRoute } from '@angular/router';
-
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,11 @@ export class LoginComponent implements OnInit {
   form: FormGroup;
   returnUrl: string;
   
-  constructor(private readonly formBuilder: FormBuilder, private authService: AuthService , private readonly router:Router, private readonly route: ActivatedRoute) 
+  constructor(
+    private readonly formBuilder: FormBuilder, 
+    private authService: AuthService , 
+    private readonly router:Router, 
+    private readonly route: ActivatedRoute) 
   {
     if (this.authService.currentUserValue) { 
       this.router.navigate(['/']);
@@ -56,6 +59,7 @@ export class LoginComponent implements OnInit {
    * evento de click en el boton registrar
    */
   onRegister(){
-    this.router.navigate(["register"]);
+    this.router.navigate(["auth/register"]);
   }
+
 }
